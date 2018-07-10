@@ -41,7 +41,7 @@ public abstract class GameEntity extends ImageView {
     /**
      * Generating x, y coordinates for entity only until it would not collide with the snake's head
      *
-     * @return : Safe x, y coordinates of the entity to spawn
+     * @return : x, y coordinates of the entity to spawn that are not collide with the snake's head
      */
     public double[] generateSafeSpotForEntity() {
         double[] coordinates = new double[2];
