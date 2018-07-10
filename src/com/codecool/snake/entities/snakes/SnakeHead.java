@@ -42,12 +42,20 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(getY() + heading.getY());
 
         // check if collided with an enemy or a powerup
+        int bodyCounter = 0;
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof Interactable) {
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
+                }
+                else {
+                    bodyCounter++;
+                    if (bodyCounter > 7) {
+                        Globals.gameLoop.stop();
+                        System.out.println("You hit your tale!");
+                    }
                 }
             }
         }
