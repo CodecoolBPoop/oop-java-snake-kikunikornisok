@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 // The base class for every game entity.
 public abstract class GameEntity extends ImageView {
 
+    protected static final int SAFE_SPAWN_DISTANCE = 30;
     protected Pane pane;
 
     protected GameEntity(Pane pane) {
@@ -23,8 +24,8 @@ public abstract class GameEntity extends ImageView {
     }
 
     protected boolean isOutOfBounds() {
-        if (getX() > Globals.WINDOW_WIDTH - 30 || getX() < 0 ||
-            getY() > Globals.WINDOW_HEIGHT - 30 || getY() < 0) {
+        if (getX() > Globals.WINDOW_WIDTH - SAFE_SPAWN_DISTANCE || getX() < 0 ||
+            getY() > Globals.WINDOW_HEIGHT - SAFE_SPAWN_DISTANCE || getY() < 0) {
             return true;
         }
         return false;
