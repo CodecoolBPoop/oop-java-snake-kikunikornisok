@@ -50,11 +50,11 @@ public class SnakeHead extends GameEntity implements Animatable {
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
                 }
-                else {
+                else if (entity instanceof SnakeBody){
                     bodyCounter++;
-                    if (bodyCounter > 7) {
+                    if (bodyCounter > 6) {
                         Globals.gameLoop.stop();
-                        System.out.println("You hit your tale!");
+                        System.out.println("You hit your tale! Game Over");
                     }
                 }
             }
