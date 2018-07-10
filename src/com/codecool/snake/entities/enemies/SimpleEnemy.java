@@ -23,10 +23,12 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         setImage(Globals.simpleEnemy);
         pane.getChildren().add(this);
         int speed = 1;
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * (Globals.WINDOW_WIDTH - SAFE_SPAWN_DISTANCE));
-        setY(rnd.nextDouble() * (Globals.WINDOW_HEIGHT - SAFE_SPAWN_DISTANCE));
 
+        double[] safeCoordinates = generateSafeSpotForEntity();
+        setX(safeCoordinates[0]);
+        setY(safeCoordinates[1]);
+
+        Random rnd = new Random();
         double direction = rnd.nextDouble() * 360;
         setRotate(direction);
         heading = Utils.directionToVector(direction, speed);

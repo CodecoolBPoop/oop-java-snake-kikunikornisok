@@ -16,9 +16,9 @@ public class SimplePowerup extends GameEntity implements Interactable {
         setImage(Globals.powerupBerry);
         pane.getChildren().add(this);
 
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * (Globals.WINDOW_WIDTH - SAFE_SPAWN_DISTANCE));
-        setY(rnd.nextDouble() * (Globals.WINDOW_HEIGHT - SAFE_SPAWN_DISTANCE));
+        double[] safeCoordinates = generateSafeSpotForEntity();
+        setX(safeCoordinates[0]);
+        setY(safeCoordinates[1]);
     }
 
     @Override
