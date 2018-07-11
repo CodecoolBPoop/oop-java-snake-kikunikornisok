@@ -76,6 +76,7 @@ public class Game extends Pane {
 
         if (Globals.gameTimeAtStart % 300 == 0) {
             new DecreasingSpeedPowerup(this);
+            new ChangeDirection(this);
         }
     }
 }

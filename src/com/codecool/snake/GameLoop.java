@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.enemies.ChangeDirection;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.animation.AnimationTimer;
 
@@ -14,6 +15,11 @@ public class GameLoop extends AnimationTimer {
             if (gameObject instanceof Animatable) {
                 Animatable animObject = (Animatable)gameObject;
                 animObject.step();
+            }
+            if (gameObject instanceof SnakeHead) {
+                if (Globals.gameTimeAtStart - ((SnakeHead) gameObject).getStartMushroomTime() > 1000) {
+                    ((SnakeHead) gameObject).changeDiversion = false;
+                }
             }
         }
         Globals.game.spawnEntities();

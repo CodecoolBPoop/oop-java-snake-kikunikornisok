@@ -20,6 +20,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int snakeMainBodyLength = 10;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
+    private float startMushroomTime;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -88,7 +89,7 @@ public class SnakeHead extends GameEntity implements Animatable {
             }
         }
         setRotate(dir);
-        Point2D heading = Utils.directionToVector(dir, speed);
+        Point2D heading = Utils.directionToVector(dir, actualSpeed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
     }
@@ -103,5 +104,13 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public float getOriginalSpeed() {
         return this.originalSpeed;
+    }
+
+    public float getStartMushroomTime() {
+        return startMushroomTime;
+    }
+
+    public void setStartMushroomTime(float startMushroomTime) {
+        this.startMushroomTime = startMushroomTime;
     }
 }
