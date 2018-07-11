@@ -59,8 +59,8 @@ public class Game extends Pane {
 
         if (randomNum == 150) {
             new SimplePowerup(this);
-//        } else if (randomNum == 250) {
-//            new DecreasingSpeedPowerUp(this);
+        } else if (randomNum == 250) {
+            new DecreasingSpeedPowerup(this);
         } else if (randomNum == 50) {
             new IncreasingSpeedEnemy(this);
         }
