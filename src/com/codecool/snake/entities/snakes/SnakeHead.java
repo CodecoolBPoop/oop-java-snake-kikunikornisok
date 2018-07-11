@@ -13,7 +13,6 @@ import java.util.List;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private int score;
     private float originalSpeed = 2;
     private float actualSpeed = originalSpeed;
     private static final float turnRate = 2;
@@ -66,7 +65,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
-            System.out.println(score);
+            System.out.println(Globals.score);
             Globals.gameLoop.stop();
         }
     }
@@ -94,11 +93,4 @@ public class SnakeHead extends GameEntity implements Animatable {
         return this.originalSpeed;
     }
 
-    public int getScore() {
-        return this.score;
-    }
-
-    public void increaseScore(int point) {
-        this.score += point;
-    }
 }

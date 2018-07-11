@@ -33,6 +33,8 @@ public class Globals {
     public static Stage stage;
     public static long gameTimeAtStart = 0;
 
+    public static int score;
+
     static {
         gameObjects = new LinkedList<>();
         newGameObjects = new LinkedList<>();

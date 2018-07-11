@@ -25,7 +25,7 @@ public class FoodPowerup extends GameEntity implements Interactable {
     @Override
     public void apply(SnakeHead snakeHead) {
         snakeHead.addPart(10);
-        snakeHead.increaseScore(point);
+        Globals.score += point;
         destroy();
     }
 
