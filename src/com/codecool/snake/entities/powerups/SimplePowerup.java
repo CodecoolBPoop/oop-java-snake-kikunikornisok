@@ -16,14 +16,14 @@ public class SimplePowerup extends GameEntity implements Interactable {
         setImage(Globals.powerupBerry);
         pane.getChildren().add(this);
 
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        double[] safeCoordinates = generateSafeSpotForEntity();
+        setX(safeCoordinates[0]);
+        setY(safeCoordinates[1]);
     }
 
     @Override
     public void apply(SnakeHead snakeHead) {
-        snakeHead.addPart(4);
+        snakeHead.addPart(10);
         destroy();
     }
 
