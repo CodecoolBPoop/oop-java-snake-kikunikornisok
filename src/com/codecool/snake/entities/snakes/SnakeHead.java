@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.PopUpWindow;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -7,6 +8,7 @@ import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -56,6 +58,12 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
+            Stage newStage = new Stage();
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.start(newStage);
+            if (popUpWindow.isRestartClicked()) {
+
+            }
         }
     }
 
