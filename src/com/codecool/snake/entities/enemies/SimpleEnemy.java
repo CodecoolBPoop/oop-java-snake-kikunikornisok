@@ -38,11 +38,11 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     @Override
     public void step() {
         if (isOutOfBounds()) {
-            if (this.getY() < 0 || this.getY() > 700) {
+            if (this.getY() < 0 || this.getY() > Globals.WINDOW_HEIGHT) {
                 this.setY(this.getY());
                 direction = 180 - direction;
             }
-            if (this.getX() < 0 || this.getX() > 700) {
+            if (this.getX() < 0 || this.getX() > Globals.WINDOW_WIDTH) {
                 this.setX(this.getX());
                 direction = 360 - direction;
             }
