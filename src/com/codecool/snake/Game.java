@@ -57,12 +57,7 @@ public class Game extends Pane {
         int randomNum = random.nextInt(300);
 
         if (randomNum == 150) {
-            new SimplePowerup(this);
-//        } else if (randomNum == 250) {
-//            new DecreasingSpeedPowerup(this);
             new FoodPowerup(this);
-        } else if (randomNum == 250) {
-            new DecreasingSpeedPowerup(this);
         } else if (randomNum == 50) {
             new IncreasingSpeedEnemy(this);
         }
