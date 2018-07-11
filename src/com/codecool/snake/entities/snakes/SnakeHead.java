@@ -8,6 +8,9 @@ import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SnakeHead extends GameEntity implements Animatable {
 
     private float originalSpeed = 2;
@@ -44,7 +47,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(getY() + heading.getY());
 
         // check if collided with an enemy or a powerup
-        int bodyCounter = 0;
+        List<GameEntity> gameObjectCopy = new ArrayList<>(Globals.gameObjects);
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof Interactable) {
@@ -52,12 +55,9 @@ public class SnakeHead extends GameEntity implements Animatable {
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
                 }
-                else if (entity instanceof SnakeBody){
-                    bodyCounter++;
-                    if (bodyCounter > snakeMainBodyLength + 1) {
-                        Globals.gameLoop.stop();
-                        System.out.println("You hit your tale! Game Over");
-                    }
+                else if (entity instanceof SnakeBody && gameObjectCopy.indexOf(entity) > snakeMainBodyLength){
+                    Globals.gameLoop.stop();
+                    System.out.println("You hit your tale! Game Over");
                 }
             }
         }

@@ -15,6 +15,8 @@ public class GameLoop extends AnimationTimer {
                 animObject.step();
             }
         }
+        Globals.game.spawnEntities();
+
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
 
