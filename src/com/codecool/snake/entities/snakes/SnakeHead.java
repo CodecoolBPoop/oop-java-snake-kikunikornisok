@@ -10,7 +10,8 @@ import javafx.scene.layout.Pane;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private float speed = 2;
+    private float originalSpeed = 2;
+    private float actualSpeed = originalSpeed;
     private static final float turnRate = 2;
     private int snakeMainBodyLength = 10;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
@@ -38,7 +39,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
         // set rotation and position
         setRotate(dir);
-        Point2D heading = Utils.directionToVector(dir, speed);
+        Point2D heading = Utils.directionToVector(dir, actualSpeed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
 
@@ -79,11 +80,15 @@ public class SnakeHead extends GameEntity implements Animatable {
         health += diff;
     }
 
-    public float getSpeed() {
-        return this.speed;
+    public float getActualSpeed() {
+        return this.actualSpeed;
     }
 
-    public void setSpeed(float newSpeed) {
-        this.speed = newSpeed;
+    public void setActualSpeed(float newSpeed) {
+        this.actualSpeed = newSpeed;
+    }
+
+    public float getOriginalSpeed() {
+        return this.originalSpeed;
     }
 }
