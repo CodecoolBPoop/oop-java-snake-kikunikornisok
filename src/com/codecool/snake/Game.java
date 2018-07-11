@@ -23,6 +23,8 @@ public class Game extends Pane {
         new SimplePowerup(this);
 
         new IncreasingSpeedEnemy(this);
+        new IncreasingSpeedEnemy(this);
+        new IncreasingSpeedEnemy(this);
     }
 
     public void start() {
