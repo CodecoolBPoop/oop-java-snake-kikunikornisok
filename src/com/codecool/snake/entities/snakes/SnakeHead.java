@@ -9,9 +9,13 @@ import com.codecool.snake.entities.powerups.ShieldPowerUP;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private static final float speed = 2;
+    private float originalSpeed = 2;
+    private float actualSpeed = originalSpeed;
     private static final float turnRate = 2;
     private int snakeMainBodyLength = 10;
     private boolean shieldActice = false;
@@ -40,12 +44,12 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
         // set rotation and position
         setRotate(dir);
-        Point2D heading = Utils.directionToVector(dir, speed);
+        Point2D heading = Utils.directionToVector(dir, actualSpeed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
 
         // check if collided with an enemy or a powerup
-        int bodyCounter = 0;
+        List<GameEntity> gameObjectCopy = new ArrayList<>(Globals.gameObjects);
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof Interactable) {
@@ -53,12 +57,9 @@ public class SnakeHead extends GameEntity implements Animatable {
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
                 }
-                else if (entity instanceof SnakeBody){
-                    bodyCounter++;
-                    if (bodyCounter > snakeMainBodyLength + 1) {
-                        Globals.gameLoop.stop();
-                        System.out.println("You hit your tale! Game Over");
-                    }
+                else if (entity instanceof SnakeBody && gameObjectCopy.indexOf(entity) > snakeMainBodyLength){
+                    Globals.gameLoop.stop();
+                    System.out.println("You hit your tale! Game Over");
                 }
                 else if (entity instanceof ShieldPowerUP){
                     Interactable interactable = (Interactable) entity;
@@ -96,5 +97,17 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void changeHealth(int diff) {
         health += diff;
+    }
+
+    public float getActualSpeed() {
+        return this.actualSpeed;
+    }
+
+    public void setActualSpeed(float newSpeed) {
+        this.actualSpeed = newSpeed;
+    }
+
+    public float getOriginalSpeed() {
+        return this.originalSpeed;
     }
 }

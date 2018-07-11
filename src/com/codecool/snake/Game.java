@@ -1,11 +1,15 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.enemies.IncreasingSpeedEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.powerups.DecreasingSpeedPowerup;
 import com.codecool.snake.entities.powerups.ShieldPowerUP;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+
+import java.util.Random;
 
 public class Game extends Pane {
 
@@ -23,6 +27,13 @@ public class Game extends Pane {
         new SimplePowerup(this);
 
         new ShieldPowerUP(this);
+
+        new IncreasingSpeedEnemy(this);
+        new IncreasingSpeedEnemy(this);
+        new IncreasingSpeedEnemy(this);
+
+        new DecreasingSpeedPowerup(this);
+        new DecreasingSpeedPowerup(this);
     }
 
     public void start() {
@@ -42,5 +53,22 @@ public class Game extends Pane {
         });
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
+    }
+
+    public void spawnEntities() {
+        Random random = new Random();
+        int randomNum = random.nextInt(300);
+
+        if (randomNum == 150) {
+            new SimplePowerup(this);
+//        } else if (randomNum == 250) {
+//            new DecreasingSpeedPowerup(this);
+        } else if (randomNum == 50) {
+            new IncreasingSpeedEnemy(this);
+        }
+
+        if (Globals.gameTimeAtStart % 300 == 0) {
+            new DecreasingSpeedPowerup(this);
+        }
     }
 }
