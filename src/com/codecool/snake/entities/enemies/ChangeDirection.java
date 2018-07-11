@@ -9,20 +9,22 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+import javax.swing.plaf.basic.BasicSplitPaneUI;
 import java.util.Random;
 
-public class ChangeDiversion extends GameEntity implements Animatable, Interactable {
+public class ChangeDirection extends GameEntity implements Animatable, Interactable {
 
     private double direction;
+
     private Point2D heading;
 
 
 
-    public ChangeDiversion(Pane pane) {
+    public ChangeDirection(Pane pane) {
         super(pane);
         setImage(Globals.diversionEnemy);
         pane.getChildren().add(this);
-        int speed = 1;
+        int speed = 0;
 
         double[] safeCoordinates = generateSafeSpotForEntity();
         setX(safeCoordinates[0]);
@@ -30,23 +32,31 @@ public class ChangeDiversion extends GameEntity implements Animatable, Interacta
 
         Random rnd = new Random();
         direction = rnd.nextDouble() * 360;
-        setRotate(direction);
+        setRotate(0);
         heading = Utils.directionToVector(direction, speed);
     }
 
     @Override
     public void step() {
+        if (isOutOfBounds()) {
+            destroy();
+        }
 
+        setRotate(direction);
+        heading = Utils.directionToVector(direction, 1);
+        setX(getX() + heading.getX());
+        setY(getY() + heading.getY());
 
     }
 
     @Override
-    public void apply(SnakeHead snakeHead) {
-
+    public void apply(SnakeHead player) {
+        player.changeDiversion = true;
+        destroy();
     }
 
     @Override
     public String getMessage() {
-        return null;
+        return "Divert";
     }
 }

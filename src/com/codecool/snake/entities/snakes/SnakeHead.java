@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
+    public boolean changeDiversion = false;
     private static final float speed = 2;
     private static final float turnRate = 2;
     private int snakeMainBodyLength = 10;
@@ -30,19 +31,8 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void step() {
         double dir = getRotate();
-        if (Globals.leftKeyDown) {
-            dir = dir - turnRate;
-        }
-        if (Globals.rightKeyDown) {
-            dir = dir + turnRate;
-        }
-        // set rotation and position
-        setRotate(dir);
-        Point2D heading = Utils.directionToVector(dir, speed);
-        setX(getX() + heading.getX());
-        setY(getY() + heading.getY());
+        changeDiversion(dir, changeDiversion);
 
-        // check if collided with an enemy or a powerup
         int bodyCounter = 0;
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
@@ -77,5 +67,27 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void changeHealth(int diff) {
         health += diff;
+    }
+
+    public void changeDiversion(double dir, boolean change) {
+        if (change) {
+            if (Globals.leftKeyDown) {
+                dir = dir + turnRate;
+            }
+            if (Globals.rightKeyDown) {
+                dir = dir - turnRate;
+            }
+        } else {
+            if (Globals.leftKeyDown) {
+                dir = dir - turnRate;
+            }
+            if (Globals.rightKeyDown) {
+                dir = dir + turnRate;
+            }
+        }
+        setRotate(dir);
+        Point2D heading = Utils.directionToVector(dir, speed);
+        setX(getX() + heading.getX());
+        setY(getY() + heading.getY());
     }
 }
