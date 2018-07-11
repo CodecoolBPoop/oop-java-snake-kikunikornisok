@@ -32,7 +32,6 @@ public class Game extends Pane {
     public void start() {
         Scene scene = getScene();
         scene.setOnKeyPressed(event -> {
-            spawnEnemies();
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
                 case RIGHT: Globals.rightKeyDown  = true; break;
@@ -40,7 +39,6 @@ public class Game extends Pane {
         });
 
         scene.setOnKeyReleased(event -> {
-            spawnEnemies();
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = false; break;
                 case RIGHT: Globals.rightKeyDown  = false; break;
@@ -53,13 +51,13 @@ public class Game extends Pane {
 
     public void spawnEnemies() {
         Random random = new Random();
-        int randomNum = random.nextInt(30);
+        int randomNum = random.nextInt(300);
 
-        if (randomNum == 15) {
+        if (randomNum == 150) {
             new SimplePowerup(this);
-//        } else if (randomNum == 25) {
+//        } else if (randomNum == 250) {
 //            new DecreasingSpeedPowerUp(this);
-        } else if (randomNum == 5) {
+        } else if (randomNum == 50) {
             new IncreasingSpeedEnemy(this);
         }
     }
