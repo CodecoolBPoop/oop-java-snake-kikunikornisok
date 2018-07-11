@@ -24,7 +24,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
 
-        addPart(4);
+        addPart(10);
     }
 
     public void step() {
@@ -52,7 +52,7 @@ public class SnakeHead extends GameEntity implements Animatable {
                 }
                 else if (entity instanceof SnakeBody){
                     bodyCounter++;
-                    if (bodyCounter > 6) {
+                    if (bodyCounter > 11) {
                         Globals.gameLoop.stop();
                         System.out.println("You hit your tale! Game Over");
                     }
