@@ -5,6 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.powerups.ShieldPowerUP;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -13,6 +14,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float speed = 2;
     private static final float turnRate = 2;
     private int snakeMainBodyLength = 10;
+    private boolean shieldActice = false;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
 
@@ -58,6 +60,10 @@ public class SnakeHead extends GameEntity implements Animatable {
                         System.out.println("You hit your tale! Game Over");
                     }
                 }
+                else if (entity instanceof ShieldPowerUP){
+                    Interactable interactable = (Interactable) entity;
+                    interactable.apply(this);
+                }
             }
         }
 
@@ -73,6 +79,19 @@ public class SnakeHead extends GameEntity implements Animatable {
             SnakeBody newPart = new SnakeBody(pane, tail);
             tail = newPart;
         }
+    }
+
+    public void activateShield(){
+        /*
+        System.out.println(456);
+        if (shieldActice){
+            shieldActice = false;
+        }else{*/
+            shieldActice = true;
+        }
+
+    public void diActivateShield(){
+        shieldActice = false;
     }
 
     public void changeHealth(int diff) {
