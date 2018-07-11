@@ -58,10 +58,14 @@ public class Game extends Pane {
 
         if (randomNum == 150) {
             new SimplePowerup(this);
-        } else if (randomNum == 250) {
-            new DecreasingSpeedPowerup(this);
+//        } else if (randomNum == 250) {
+//            new DecreasingSpeedPowerup(this);
         } else if (randomNum == 50) {
             new IncreasingSpeedEnemy(this);
+        }
+
+        if (Globals.gameTimeAtStart % 300 == 0) {
+            new DecreasingSpeedPowerup(this);
         }
     }
 }

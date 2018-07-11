@@ -31,6 +31,7 @@ public class Globals {
     public static GameLoop gameLoop;
     public static Game game;
     public static Stage stage;
+    public static long gameTimeAtStart = 0;
 
     static {
         gameObjects = new LinkedList<>();
