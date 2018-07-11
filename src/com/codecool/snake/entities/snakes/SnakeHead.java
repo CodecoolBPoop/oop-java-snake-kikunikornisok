@@ -12,6 +12,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     private static final float speed = 2;
     private static final float turnRate = 2;
+    private int snakeMainBodyLength = 10;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
 
@@ -24,7 +25,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
 
-        addPart(10);
+        addPart(snakeMainBodyLength);
     }
 
     public void step() {
@@ -52,7 +53,7 @@ public class SnakeHead extends GameEntity implements Animatable {
                 }
                 else if (entity instanceof SnakeBody){
                     bodyCounter++;
-                    if (bodyCounter > 11) {
+                    if (bodyCounter > snakeMainBodyLength + 1) {
                         Globals.gameLoop.stop();
                         System.out.println("You hit your tale! Game Over");
                     }
