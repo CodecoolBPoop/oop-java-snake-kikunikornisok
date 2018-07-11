@@ -4,7 +4,7 @@ import com.codecool.snake.entities.enemies.IncreasingSpeedEnemy;
 import com.codecool.snake.entities.enemies.ChangeDirection;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.DecreasingSpeedPowerup;
-import com.codecool.snake.entities.powerups.SimplePowerup;
+import com.codecool.snake.entities.powerups.FoodPowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -24,10 +24,10 @@ public class Game extends Pane {
         new ChangeDirection(this);
         new ChangeDirection(this);
 
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
+        new FoodPowerup(this);
+        new FoodPowerup(this);
+        new FoodPowerup(this);
+        new FoodPowerup(this);
 
         new IncreasingSpeedEnemy(this);
         new IncreasingSpeedEnemy(this);
@@ -67,9 +67,7 @@ public class Game extends Pane {
         int randomNum = random.nextInt(300);
 
         if (randomNum == 150) {
-            new SimplePowerup(this);
-//        } else if (randomNum == 250) {
-//            new DecreasingSpeedPowerup(this);
+            new FoodPowerup(this);
         } else if (randomNum == 50) {
             new IncreasingSpeedEnemy(this);
         }
