@@ -48,12 +48,11 @@ public class Game extends Pane {
                 case RIGHT: Globals.rightKeyDown  = false; break;
             }
         });
-        spawnEnemies();
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
     }
 
-    public void spawnEnemies() {
+    public void spawnEntities() {
         Random random = new Random();
         int randomNum = random.nextInt(300);
 

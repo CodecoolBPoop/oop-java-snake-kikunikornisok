@@ -7,7 +7,7 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 
 public class DecreasingSpeedPowerup extends GameEntity implements Interactable {
-    private float decreasingAmount = (float) 1;
+    private float decreasingAmount = (float) 0.2;
 
     public DecreasingSpeedPowerup(Pane pane) {
         super(pane);
