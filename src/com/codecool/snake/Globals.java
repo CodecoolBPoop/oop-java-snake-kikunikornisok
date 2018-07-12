@@ -34,9 +34,11 @@ public class Globals {
     public static Game game;
     public static Stage stage;
     public static Stage popUpStage;
+    public static Stage startStage;
     public static Scene scene;
     public static long gameTimeAtStart = 0;
     public static long shieldActivated;
+    public static boolean twoPlayers;
 
     public static int score;
 

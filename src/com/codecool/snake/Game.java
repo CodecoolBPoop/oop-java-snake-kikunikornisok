@@ -18,7 +18,9 @@ import java.util.Random;
 public class Game extends Pane {
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+        if (!Globals.twoPlayers) {
+            new SnakeHead(this, 500, 500);
+        }
     }
 
     public void start(Scene scene) {
@@ -75,6 +77,5 @@ public class Game extends Pane {
         Globals.score = 0;
         Globals.gameObjects.clear();
         SnakeHead newHead = new SnakeHead(this, 500, 500);
-        Globals.popUpStage.close();
     }
 }
