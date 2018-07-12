@@ -1,34 +1,31 @@
 package com.codecool.snake.entities.powerups;
 
-import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
+import java.util.Date;
 
-import java.util.Random;
+public class ShieldPowerUP extends GameEntity implements Interactable {
 
-// a simple powerup that makes the snake grow TODO make other powerups
-public class SimplePowerup extends GameEntity implements Interactable {
-
-    public SimplePowerup(Pane pane) {
+    public ShieldPowerUP(Pane pane) {
         super(pane);
-        setImage(Globals.powerupBerry);
+        setImage(Globals.shieldPowerUP);
         pane.getChildren().add(this);
 
         double[] safeCoordinates = generateSafeSpotForEntity();
         setX(safeCoordinates[0]);
         setY(safeCoordinates[1]);
     }
-
     @Override
     public void apply(SnakeHead snakeHead) {
-        snakeHead.addPart(10);
+        snakeHead.activateShield();
         destroy();
     }
 
     @Override
     public String getMessage() {
-        return "Got power-up :)";
+        return "Got szupcsi Shield 8===D";
     }
 }

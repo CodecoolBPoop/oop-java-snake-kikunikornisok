@@ -1,4 +1,4 @@
-package com.codecool.snake.entities.enemies;
+package com.codecool.snake.entities.powerups;
 
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.GameEntity;
@@ -6,13 +6,13 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 
-public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
-    private float increasingAmount = (float) 0.2;
+public class DecreasingSpeedPowerup extends GameEntity implements Interactable {
+    private float decreasingAmount = (float) 0.2;
 
-    public IncreasingSpeedEnemy(Pane pane) {
+    public DecreasingSpeedPowerup(Pane pane) {
         super(pane);
 
-        setImage(Globals.squirrel);
+        setImage(Globals.snail);
         pane.getChildren().add(this);
 
         double[] safeCoordinates = generateSafeSpotForEntity();
@@ -22,8 +22,8 @@ public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
 
     @Override
     public void apply(SnakeHead snakeHead) {
-        float newSpeed = snakeHead.getActualSpeed() + increasingAmount;
-        if(snakeHead.shieldActice == false) {
+        if (snakeHead.getActualSpeed() > snakeHead.getOriginalSpeed()) {
+            float newSpeed = snakeHead.getActualSpeed() - decreasingAmount;
             snakeHead.setActualSpeed(newSpeed);
         }
         destroy();
@@ -31,6 +31,6 @@ public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
 
     @Override
     public String getMessage() {
-        return "speed increased";
+        return "speed decreased";
     }
 }

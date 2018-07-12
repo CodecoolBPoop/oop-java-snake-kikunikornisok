@@ -9,4 +9,6 @@ public interface Interactable {
 
     String getMessage();
 
+
+
 }

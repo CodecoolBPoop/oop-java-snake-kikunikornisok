@@ -5,16 +5,24 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.powerups.ShieldPowerUP;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private float speed = 2;
+    private float originalSpeed = 2;
+    private float actualSpeed = originalSpeed;
+    public boolean changeDiversion = false;
     private static final float turnRate = 2;
     private int snakeMainBodyLength = 10;
+    private boolean shieldActice = false;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
+    private float startMushroomTime;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -30,20 +38,13 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void step() {
         double dir = getRotate();
-        if (Globals.leftKeyDown) {
-            dir = dir - turnRate;
+        changeDiversion(dir, changeDiversion);
+        if(Globals.gameTimeAtStart-Globals.shieldactiveted == 600){
+            diActivateShield();
         }
-        if (Globals.rightKeyDown) {
-            dir = dir + turnRate;
-        }
-        // set rotation and position
-        setRotate(dir);
-        Point2D heading = Utils.directionToVector(dir, speed);
-        setX(getX() + heading.getX());
-        setY(getY() + heading.getY());
 
         // check if collided with an enemy or a powerup
-        int bodyCounter = 0;
+        List<GameEntity> gameObjectCopy = new ArrayList<>(Globals.gameObjects);
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof Interactable) {
@@ -51,12 +52,15 @@ public class SnakeHead extends GameEntity implements Animatable {
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
                 }
-                else if (entity instanceof SnakeBody){
-                    bodyCounter++;
-                    if (bodyCounter > snakeMainBodyLength + 1) {
+                else if (entity instanceof SnakeBody && gameObjectCopy.indexOf(entity) > snakeMainBodyLength){
+                    if(isShieldActice() == false){
                         Globals.gameLoop.stop();
-                        System.out.println("You hit your tale! Game Over");
                     }
+                    System.out.println("You hit your tale! Game Over");
+                }
+                else if (entity instanceof ShieldPowerUP){
+                    Interactable interactable = (Interactable) entity;
+                    interactable.apply(this);
                 }
             }
         }
@@ -64,6 +68,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
+            System.out.println(Globals.score);
             Globals.gameLoop.stop();
         }
     }
@@ -75,15 +80,63 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
     }
 
+    public void activateShield(){
+        shieldActice = true;
+        Globals.shieldactiveted = Globals.gameTimeAtStart;
+    ; }
+
+    public void diActivateShield(){
+        System.out.println("Shield OFF");
+        Globals.shieldactiveted = 0;
+        shieldActice = false;
+    }
+
     public void changeHealth(int diff) {
         health += diff;
     }
 
-    public float getSpeed() {
-        return this.speed;
+    public void changeDiversion(double dir, boolean change) {
+        if (change) {
+            if (Globals.leftKeyDown) {
+                dir = dir + turnRate;
+            }
+            if (Globals.rightKeyDown) {
+                dir = dir - turnRate;
+            }
+        } else {
+            if (Globals.leftKeyDown) {
+                dir = dir - turnRate;
+            }
+            if (Globals.rightKeyDown) {
+                dir = dir + turnRate;
+            }
+        }
+        setRotate(dir);
+        Point2D heading = Utils.directionToVector(dir, actualSpeed);
+        setX(getX() + heading.getX());
+        setY(getY() + heading.getY());
     }
 
-    public void setSpeed(float newSpeed) {
-        this.speed = newSpeed;
+    public boolean isShieldActice() { return shieldActice; }
+
+    public float getActualSpeed() {
+        return this.actualSpeed;
     }
+
+    public void setActualSpeed(float newSpeed) {
+        this.actualSpeed = newSpeed;
+    }
+
+    public float getOriginalSpeed() {
+        return this.originalSpeed;
+    }
+
+    public float getStartMushroomTime() {
+        return startMushroomTime;
+    }
+
+    public void setStartMushroomTime(float startMushroomTime) {
+        this.startMushroomTime = startMushroomTime;
+    }
+
 }
