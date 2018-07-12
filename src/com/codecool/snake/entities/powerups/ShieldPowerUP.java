@@ -22,25 +22,6 @@ public class ShieldPowerUP extends GameEntity implements Interactable {
     public void apply(SnakeHead snakeHead) {
         snakeHead.activateShield();
         destroy();
-
-        /*
-        long startTime = System.currentTimeMillis();
-        long elapsedTime = startTime + 10*1000;
-
-        while (elapsedTime != startTime) {
-            System.out.println(startTime);
-            //perform db poll/check
-            //elapsedTime = (new Date()).getTime() - startTime;
-        }
-        */
-        System.out.println(123);
-    }
-
-    public long timer(){
-        long startTime = System.currentTimeMillis();
-        long elapsedTime = startTime + 10*1000;
-
-        return elapsedTime;
     }
 
     @Override

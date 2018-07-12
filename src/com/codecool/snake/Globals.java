@@ -34,6 +34,7 @@ public class Globals {
     public static Game game;
     public static Stage stage;
     public static long gameTimeAtStart = 0;
+    public static long shieldactiveted;
 
     public static int score;
 

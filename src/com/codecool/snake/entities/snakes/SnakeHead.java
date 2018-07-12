@@ -19,7 +19,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     public boolean changeDiversion = false;
     private static final float turnRate = 2;
     private int snakeMainBodyLength = 10;
-    private boolean shieldActice = false;
+    public boolean shieldActice = false;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private float startMushroomTime;
@@ -39,6 +39,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void step() {
         double dir = getRotate();
         changeDiversion(dir, changeDiversion);
+        if(Globals.gameTimeAtStart-Globals.shieldactiveted == 600){
+            diActivateShield();
+        }
 
         // check if collided with an enemy or a powerup
         List<GameEntity> gameObjectCopy = new ArrayList<>(Globals.gameObjects);
@@ -76,15 +79,13 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void activateShield(){
-        /*
-        System.out.println(456);
-        if (shieldActice){
-            shieldActice = false;
-        }else{*/
-            shieldActice = true;
-        }
+        shieldActice = true;
+        Globals.shieldactiveted = Globals.gameTimeAtStart;
+    ; }
 
     public void diActivateShield(){
+        System.out.println("Shield OFF");
+        Globals.shieldactiveted = 0;
         shieldActice = false;
     }
 
