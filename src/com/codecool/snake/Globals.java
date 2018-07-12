@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -32,6 +33,8 @@ public class Globals {
     public static GameLoop gameLoop;
     public static Game game;
     public static Stage stage;
+    public static Stage popUpStage;
+    public static Scene scene;
     public static long gameTimeAtStart = 0;
     public static long shieldActivated;
 
