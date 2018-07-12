@@ -45,7 +45,7 @@ public class PopUpWindow extends Application {
 
         HBox layout = new HBox(10);
         layout.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-font-size: 20px;");
-        layout.getChildren().addAll(show, score, hide);
+        layout.getChildren().addAll(score, show, hide);
         primaryStage.setScene(new Scene(layout));
         primaryStage.show();
     }
