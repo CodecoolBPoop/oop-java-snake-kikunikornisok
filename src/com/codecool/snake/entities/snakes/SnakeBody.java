@@ -8,7 +8,9 @@ import com.sun.javafx.geom.Vec2d;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class SnakeBody extends GameEntity implements Animatable {
 
@@ -19,7 +21,8 @@ public class SnakeBody extends GameEntity implements Animatable {
     public SnakeBody(Pane pane, GameEntity parent) {
         super(pane);
         this.parent = parent;
-        setImage(Globals.snakeBody);
+
+        setImage(Globals.snakeBody[1]);
 
         // place it visually below the current tail
         List<Node> children = pane.getChildren();

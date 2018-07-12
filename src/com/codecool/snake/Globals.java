@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -15,8 +16,8 @@ public class Globals {
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
-    public static Image snakeHead = new Image("snake_head.png");
-    public static Image snakeBody = new Image("mistic.png");
+    public static Image[] snakeHead = {new Image("snake_head.png"), new Image("nagyonkigyo.png")};
+    public static Image[] snakeBody = {new Image("mistic.png"), new Image("robin.png")};
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image squirrel = new Image("squirrel.png");
     public static Image diversionEnemy = new Image("mushroom.png");
@@ -27,6 +28,9 @@ public class Globals {
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
+    public static boolean aKeyDown;
+    public static boolean dKeyDown;
+    public static SnakeHead[] snakeHeads = new SnakeHead[2];
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
@@ -39,6 +43,7 @@ public class Globals {
     public static long gameTimeAtStart = 0;
     public static long shieldActivated;
     public static boolean twoPlayers;
+    public static int snakeCounter = 1;
 
     public static int score;
 
