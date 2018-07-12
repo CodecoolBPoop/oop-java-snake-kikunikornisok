@@ -17,28 +17,6 @@ public class Game extends Pane {
 
     public Game() {
         new SnakeHead(this, 500, 500);
-    /*
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new ChangeDirection(this);
-        new ChangeDirection(this);
-
-        new FoodPowerup(this);
-        new FoodPowerup(this);
-        new FoodPowerup(this);
-        new FoodPowerup(this);
-
-        new ShieldPowerup(this);
-
-        new IncreasingSpeedEnemy(this);
-        new IncreasingSpeedEnemy(this);
-        new IncreasingSpeedEnemy(this);
-
-        new DecreasingSpeedPowerup(this);
-        new DecreasingSpeedPowerup(this);
-        */
     }
 
     public void start() {
@@ -68,18 +46,24 @@ public class Game extends Pane {
 
     public void spawnEntities() {
         Random random = new Random();
-        int randomNum = random.nextInt(300);
+        int randomNum = random.nextInt(1017);
 
-        if (randomNum == 150) {
+        if (randomNum == 500) {
             new FoodPowerup(this);
+                System.out.println(1017);
         } else if (randomNum == 50) {
             new IncreasingSpeedEnemy(this);
         }
 
-        if (Globals.gameTimeAtStart % 300 == 0) {
-            new DecreasingSpeedPowerup(this);
+        if (Globals.gameTimeAtStart % 500 == 0) {
+            if(Globals.newGameObjects.contains(new DecreasingSpeedPowerup(this))) {
+                System.out.println("New CSIGA in da house");
+            }
             new ChangeDirection(this);
         }
-
+        if(Globals.gameTimeAtStart-Globals.shieldActivated == 699){
+            new ShieldPowerup(this);
+            System.out.println("Shield on the map bitch");
+        }
     }
 }

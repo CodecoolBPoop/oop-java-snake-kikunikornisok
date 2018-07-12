@@ -52,7 +52,7 @@ public class ChangeDirection extends GameEntity implements Animatable, Interacta
     @Override
     public void apply(SnakeHead player) {
         player.setStartMushroomTime(Globals.gameTimeAtStart);
-        if(player.isShieldActive() == false) {
+        if(!player.isShieldActive()) {
             player.setChangeDiversion(true);
         }
         destroy();
