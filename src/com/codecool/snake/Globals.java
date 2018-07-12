@@ -18,7 +18,8 @@ public class Globals {
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
-    public static Image powerupBerry = new Image("powerup_berry.png");
+    public static Image diversionEnemy = new Image("mushroom.png");
+    public static Image mouse = new Image("mouse.png");
     public static Image redBull = new Image("redbull.png");
     public static Image snail = new Image("snail.png");
     public static Image shieldPowerUP = new Image("PC-Privacy-Shield.gif");
@@ -33,6 +34,8 @@ public class Globals {
     public static Game game;
     public static Stage stage;
     public static long gameTimeAtStart = 0;
+
+    public static int score;
 
     static {
         gameObjects = new LinkedList<>();

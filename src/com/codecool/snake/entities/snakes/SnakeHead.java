@@ -16,11 +16,13 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     private float originalSpeed = 2;
     private float actualSpeed = originalSpeed;
+    public boolean changeDiversion = false;
     private static final float turnRate = 2;
     private int snakeMainBodyLength = 10;
     private boolean shieldActice = false;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
+    private float startMushroomTime;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -36,17 +38,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void step() {
         double dir = getRotate();
-        if (Globals.leftKeyDown) {
-            dir = dir - turnRate;
-        }
-        if (Globals.rightKeyDown) {
-            dir = dir + turnRate;
-        }
-        // set rotation and position
-        setRotate(dir);
-        Point2D heading = Utils.directionToVector(dir, actualSpeed);
-        setX(getX() + heading.getX());
-        setY(getY() + heading.getY());
+        changeDiversion(dir, changeDiversion);
 
         // check if collided with an enemy or a powerup
         List<GameEntity> gameObjectCopy = new ArrayList<>(Globals.gameObjects);
@@ -71,6 +63,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
+            System.out.println(Globals.score);
             Globals.gameLoop.stop();
         }
     }
@@ -99,6 +92,28 @@ public class SnakeHead extends GameEntity implements Animatable {
         health += diff;
     }
 
+    public void changeDiversion(double dir, boolean change) {
+        if (change) {
+            if (Globals.leftKeyDown) {
+                dir = dir + turnRate;
+            }
+            if (Globals.rightKeyDown) {
+                dir = dir - turnRate;
+            }
+        } else {
+            if (Globals.leftKeyDown) {
+                dir = dir - turnRate;
+            }
+            if (Globals.rightKeyDown) {
+                dir = dir + turnRate;
+            }
+        }
+        setRotate(dir);
+        Point2D heading = Utils.directionToVector(dir, actualSpeed);
+        setX(getX() + heading.getX());
+        setY(getY() + heading.getY());
+    }
+
     public float getActualSpeed() {
         return this.actualSpeed;
     }
@@ -110,4 +125,13 @@ public class SnakeHead extends GameEntity implements Animatable {
     public float getOriginalSpeed() {
         return this.originalSpeed;
     }
+
+    public float getStartMushroomTime() {
+        return startMushroomTime;
+    }
+
+    public void setStartMushroomTime(float startMushroomTime) {
+        this.startMushroomTime = startMushroomTime;
+    }
+
 }
