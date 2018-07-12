@@ -23,7 +23,7 @@ public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
     @Override
     public void apply(SnakeHead snakeHead) {
         float newSpeed = snakeHead.getActualSpeed() + increasingAmount;
-        if(snakeHead.shieldActice == false) {
+        if(snakeHead.isShieldActive() == false) {
             snakeHead.setActualSpeed(newSpeed);
         }
         destroy();

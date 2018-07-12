@@ -19,7 +19,7 @@ public class GameLoop extends AnimationTimer {
             }
             if (gameObject instanceof SnakeHead) {
                 if (Globals.gameTimeAtStart - ((SnakeHead) gameObject).getStartMushroomTime() > 1000) {
-                    ((SnakeHead) gameObject).changeDiversion = false;
+                    ((SnakeHead) gameObject).setChangeDiversion(false);
                 }
             }
         }
