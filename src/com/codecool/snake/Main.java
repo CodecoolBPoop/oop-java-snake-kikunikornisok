@@ -21,6 +21,8 @@ public class Main extends Application {
 
     public static void startGame() {
         Globals.game = new Game();
+        Sound sound = new Sound();
+
 
         Globals.stage.setTitle("Snake Game");
         Scene scene = new Scene(Globals.game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
@@ -28,6 +30,8 @@ public class Main extends Application {
         Globals.stage.show();
         Globals.game.setTableBackground(new Image("fű.jpg"));
         Globals.scene = scene;
+        sound.startMusic("resources/Demokratikus-Kígyók.wav");
+
         Globals.game.start(scene);
     }
 }

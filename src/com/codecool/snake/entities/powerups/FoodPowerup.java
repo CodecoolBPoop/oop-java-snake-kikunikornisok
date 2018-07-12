@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.powerups;
 
+import com.codecool.snake.Sound;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Interactable;
@@ -24,6 +25,8 @@ public class FoodPowerup extends GameEntity implements Interactable {
 
     @Override
     public void apply(SnakeHead snakeHead) {
+        Sound sound = new Sound();
+        sound.playShortSound("resources/mouse.wav");
         snakeHead.addPart(10);
         Globals.score += point;
         destroy();
