@@ -97,7 +97,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void diActivateShield(){
-        System.out.println("Shield OFF");
+        System.out.println("Shield wears off");
         Globals.shieldActivated = 0;
         shieldActive = false;
     }

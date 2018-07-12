@@ -60,6 +60,6 @@ public class ChangeDirection extends GameEntity implements Animatable, Interacta
 
     @Override
     public String getMessage() {
-        return "Divert";
+        return "Left-right keys swapped";
     }
 }

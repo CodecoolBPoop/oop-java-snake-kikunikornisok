@@ -63,13 +63,13 @@ public class Game extends Pane {
 
         if (Globals.gameTimeAtStart % 500 == 0) {
             if(Globals.newGameObjects.contains(new DecreasingSpeedPowerup(this))) {
-                System.out.println("New CSIGA in da house");
+                System.out.println("New snail spawned");
             }
             new ChangeDirection(this);
         }
         if(Globals.gameTimeAtStart-Globals.shieldActivated == 699){
             new ShieldPowerup(this);
-            System.out.println("Shield on the map bitch");
+            System.out.println("New shield spawned");
         }
     }
 
