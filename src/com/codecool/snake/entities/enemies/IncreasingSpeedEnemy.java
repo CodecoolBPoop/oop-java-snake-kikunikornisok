@@ -12,7 +12,7 @@ public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
     public IncreasingSpeedEnemy(Pane pane) {
         super(pane);
 
-        setImage(Globals.redBull);
+        setImage(Globals.squirrel);
         pane.getChildren().add(this);
 
         double[] safeCoordinates = generateSafeSpotForEntity();
@@ -23,7 +23,7 @@ public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
     @Override
     public void apply(SnakeHead snakeHead) {
         float newSpeed = snakeHead.getActualSpeed() + increasingAmount;
-        if(snakeHead.isShieldActice() == false) {
+        if(snakeHead.isShieldActive() == false) {
             snakeHead.setActualSpeed(newSpeed);
         }
         destroy();
