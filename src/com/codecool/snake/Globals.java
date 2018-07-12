@@ -1,8 +1,8 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
-import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -17,7 +17,11 @@ public class Globals {
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
-    public static Image powerupBerry = new Image("powerup_berry.png");
+    public static Image squirrel = new Image("squirrel.png");
+    public static Image diversionEnemy = new Image("mushroom.png");
+    public static Image mouse = new Image("mouse.png");
+    public static Image snail = new Image("snail.png");
+    public static Image shield = new Image("shield.gif");
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
@@ -26,6 +30,12 @@ public class Globals {
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
+    public static Game game;
+    public static Stage stage;
+    public static long gameTimeAtStart = 0;
+    public static long shieldActivated;
+
+    public static int score;
 
     static {
         gameObjects = new LinkedList<>();
