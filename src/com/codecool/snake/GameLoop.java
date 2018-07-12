@@ -2,10 +2,8 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
-import com.codecool.snake.entities.enemies.ChangeDirection;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.animation.AnimationTimer;
-import sun.nio.ch.sctp.SctpNet;
 
 public class GameLoop extends AnimationTimer {
 

@@ -1,6 +1,7 @@
 package com.codecool.snake.entities.enemies;
 
 import com.codecool.snake.Globals;
+import com.codecool.snake.Sound;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
@@ -22,6 +23,8 @@ public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
 
     @Override
     public void apply(SnakeHead snakeHead) {
+        Sound sound = new Sound();
+        sound.playShortSound("resources/eat.wav");
         float newSpeed = snakeHead.getActualSpeed() + increasingAmount;
         if(!snakeHead.isShieldActive()) {
             snakeHead.setActualSpeed(newSpeed);
