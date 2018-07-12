@@ -16,8 +16,8 @@ public class Globals {
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
-    public static Image[] snakeHeadImages = {new Image("snake_head.png"), new Image("nagyonkigyo.png")};
-    public static Image[] snakeBodyImages = {new Image("mistic.png"), new Image("robin.png")};
+    public static Image[] snakeHeadImages = {new Image("snake_head1.png"), new Image("snake_head2.png")};
+    public static Image[] snakeBodyImages = {new Image("snake_body1.png"), new Image("snake_body2.png")};
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image squirrel = new Image("squirrel.png");
     public static Image diversionEnemy = new Image("mushroom.png");
