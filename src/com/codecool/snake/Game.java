@@ -86,6 +86,7 @@ public class Game extends Pane {
         for (GameEntity entity: Globals.getGameObjects()) {
             entity.destroy();
         }
+        Globals.score = 0;
         Globals.gameObjects.clear();
         SnakeHead newHead = new SnakeHead(this, 500, 500);
         Globals.popUpStage.close();
