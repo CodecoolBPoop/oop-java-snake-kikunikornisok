@@ -3,7 +3,6 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.IncreasingSpeedEnemy;
 import com.codecool.snake.entities.enemies.ChangeDirection;
-import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.DecreasingSpeedPowerup;
 import com.codecool.snake.entities.powerups.ShieldPowerup;
 import com.codecool.snake.entities.powerups.FoodPowerup;
@@ -12,13 +11,17 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
-import java.util.LinkedList;
 import java.util.Random;
 
 public class Game extends Pane {
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+        SnakeHead snakeHeadOne = new SnakeHead(this, 400, 500);
+        Globals.snakeHeads[0] = snakeHeadOne;
+        if (Globals.twoPlayers) {
+            SnakeHead snakeHeadTwo = new SnakeHead(this, 600, 500);
+            Globals.snakeHeads[1] = snakeHeadTwo;
+        }
     }
 
     public void start(Scene scene) {
@@ -26,6 +29,8 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
                 case RIGHT: Globals.rightKeyDown  = true; break;
+                case A: Globals.aKeyDown = true; break;
+                case D: Globals.dKeyDown = true; break;
             }
         });
 
@@ -33,6 +38,8 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = false; break;
                 case RIGHT: Globals.rightKeyDown  = false; break;
+                case A: Globals.aKeyDown = false; break;
+                case D: Globals.dKeyDown = false; break;
             }
         });
         Globals.gameLoop = new GameLoop();
@@ -74,7 +81,12 @@ public class Game extends Pane {
         }
         Globals.score = 0;
         Globals.gameObjects.clear();
-        SnakeHead newHead = new SnakeHead(this, 500, 500);
-        Globals.popUpStage.close();
+        SnakeHead snakeHeadOne = new SnakeHead(this, 400, 500);
+        Globals.snakeHeads[0] = snakeHeadOne;
+        Globals.snakeCounter = 1;
+        if (Globals.twoPlayers) {
+            SnakeHead snakeHeadTwo = new SnakeHead(this, 600, 500);
+            Globals.snakeHeads[1] = snakeHeadTwo;
+        }
     }
 }

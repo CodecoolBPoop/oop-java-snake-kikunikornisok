@@ -6,7 +6,6 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
-import com.codecool.snake.entities.powerups.ShieldPowerup;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -32,21 +31,30 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(yc);
         health = 100;
         tail = this;
-        setImage(Globals.snakeHead);
+        if (Globals.snakeCounter == 1) {
+            setImage(Globals.snakeHead[0]);
+        } else {
+            setImage(Globals.snakeHead[1]);
+        }
         pane.getChildren().add(this);
 
         addPart(snakeMainBodyLength);
+
+        if (Globals.twoPlayers) {
+            Globals.snakeCounter++;
+        }
     }
 
     public void step() {
         double dir = getRotate();
-        changeDiversion(dir, changeDiversion);
+        changeDiversion(this, dir, changeDiversion);
         if(Globals.gameTimeAtStart-Globals.shieldActivated == 700) {
             diActivateShield();
         }
 
         // check if collided with an enemy or a powerup
         List<GameEntity> gameObjectCopy = new ArrayList<>(Globals.gameObjects);
+        int snakeBodyLengthToCheck = Globals.twoPlayers ? snakeMainBodyLength * 2 : snakeMainBodyLength;
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof Interactable) {
@@ -54,7 +62,7 @@ public class SnakeHead extends GameEntity implements Animatable {
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
                 }
-                else if (entity instanceof SnakeBody && gameObjectCopy.indexOf(entity) > snakeMainBodyLength){
+                else if (entity instanceof SnakeBody && gameObjectCopy.indexOf(entity) > snakeBodyLengthToCheck + 1) {
                     if(!isShieldActive()){
                         Globals.gameLoop.stop();
                         Globals.popUpStage = new Stage();
@@ -99,20 +107,39 @@ public class SnakeHead extends GameEntity implements Animatable {
         health += diff;
     }
 
-    public void changeDiversion(double dir, boolean change) {
-        if (change) {
-            if (Globals.leftKeyDown) {
-                dir = dir + turnRate;
+    public void changeDiversion(SnakeHead snakeHead, double dir, boolean change) {
+        if (snakeHead == Globals.snakeHeads[0]) {
+            if (change) {
+                if (Globals.leftKeyDown) {
+                    dir = dir + turnRate;
+                }
+                if (Globals.rightKeyDown) {
+                    dir = dir - turnRate;
+                }
+            } else {
+                if (Globals.leftKeyDown) {
+                    dir = dir - turnRate;
+                }
+                if (Globals.rightKeyDown) {
+                    dir = dir + turnRate;
+                }
             }
-            if (Globals.rightKeyDown) {
-                dir = dir - turnRate;
-            }
-        } else {
-            if (Globals.leftKeyDown) {
-                dir = dir - turnRate;
-            }
-            if (Globals.rightKeyDown) {
-                dir = dir + turnRate;
+        }
+        if (snakeHead == Globals.snakeHeads[1]){
+            if (change) {
+                if (Globals.aKeyDown) {
+                    dir = dir + turnRate;
+                }
+                if (Globals.dKeyDown) {
+                    dir = dir - turnRate;
+                }
+            } else {
+                if (Globals.aKeyDown) {
+                    dir = dir - turnRate;
+                }
+                if (Globals.dKeyDown) {
+                    dir = dir + turnRate;
+                }
             }
         }
         setRotate(dir);
