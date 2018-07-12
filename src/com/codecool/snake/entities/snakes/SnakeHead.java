@@ -39,7 +39,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void step() {
         double dir = getRotate();
         changeDiversion(dir, changeDiversion);
-        if(Globals.gameTimeAtStart-Globals.shieldactiveted == 600){
+        if(Globals.gameTimeAtStart-Globals.shieldactiveted == 700){
             diActivateShield();
         }
 

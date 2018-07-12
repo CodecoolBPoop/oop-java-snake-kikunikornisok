@@ -17,7 +17,7 @@ public class Game extends Pane {
 
     public Game() {
         new SnakeHead(this, 500, 500);
-
+    /*
         new SimpleEnemy(this);
         new SimpleEnemy(this);
         new SimpleEnemy(this);
@@ -38,6 +38,7 @@ public class Game extends Pane {
 
         new DecreasingSpeedPowerup(this);
         new DecreasingSpeedPowerup(this);
+        */
     }
 
     public void start() {
@@ -79,5 +80,6 @@ public class Game extends Pane {
             new DecreasingSpeedPowerup(this);
             new ChangeDirection(this);
         }
+
     }
 }
