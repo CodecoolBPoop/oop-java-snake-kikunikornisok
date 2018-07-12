@@ -18,27 +18,23 @@ import javafx.stage.WindowEvent;
 
 public class PopUpWindow extends Application {
 
-    private boolean restartClicked;
-    private boolean exitClicked;
-
     public static void main(String[] args) { launch(args); }
 
     @Override public void start(final Stage primaryStage) {
         primaryStage.setTitle("Game Over");
         final Popup popup = new Popup(); popup.setX(300); popup.setY(200);
-
         Button show = new Button("Restart");
         show.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
                 System.out.println("restart clicked");
-                restartClicked = true;
+                Globals.game.resetGame();
+                Globals.game.start(Globals.scene);
             }
         });
 
         Button hide = new Button("Exit");
         hide.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
-                exitClicked = true;
                 Platform.exit();
             }
         });
@@ -50,11 +46,4 @@ public class PopUpWindow extends Application {
         primaryStage.show();
     }
 
-    public boolean isRestartClicked() {
-        return restartClicked;
-    }
-
-    public boolean isExitClicked() {
-        return exitClicked;
-    }
 }

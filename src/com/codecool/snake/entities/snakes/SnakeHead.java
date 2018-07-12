@@ -72,12 +72,9 @@ public class SnakeHead extends GameEntity implements Animatable {
             System.out.println("Game Over");
             System.out.println(Globals.score);
             Globals.gameLoop.stop();
-            Stage newStage = new Stage();
+            Globals.popUpStage = new Stage();
             PopUpWindow popUpWindow = new PopUpWindow();
-            popUpWindow.start(newStage);
-            if (popUpWindow.isRestartClicked()) {
-
-            }
+            popUpWindow.start(Globals.popUpStage);
         }
     }
 
