@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.IncreasingSpeedEnemy;
 import com.codecool.snake.entities.enemies.ChangeDirection;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
@@ -11,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Game extends Pane {
@@ -19,8 +21,7 @@ public class Game extends Pane {
         new SnakeHead(this, 500, 500);
     }
 
-    public void start() {
-        Scene scene = getScene();
+    public void start(Scene scene) {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
@@ -65,5 +66,15 @@ public class Game extends Pane {
             new ShieldPowerup(this);
             System.out.println("Shield on the map bitch");
         }
+    }
+
+    public void resetGame() {
+        for (GameEntity entity: Globals.getGameObjects()) {
+            entity.destroy();
+        }
+        Globals.score = 0;
+        Globals.gameObjects.clear();
+        SnakeHead newHead = new SnakeHead(this, 500, 500);
+        Globals.popUpStage.close();
     }
 }

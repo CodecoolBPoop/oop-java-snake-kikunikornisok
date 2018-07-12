@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.PopUpWindow;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -8,6 +9,7 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.powerups.ShieldPowerup;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,14 +55,13 @@ public class SnakeHead extends GameEntity implements Animatable {
                     System.out.println(interactable.getMessage());
                 }
                 else if (entity instanceof SnakeBody && gameObjectCopy.indexOf(entity) > snakeMainBodyLength){
-                    if(isShieldActive() == false){
+                    if(!isShieldActive()){
                         Globals.gameLoop.stop();
+                        Globals.popUpStage = new Stage();
+                        PopUpWindow popUpWindow = new PopUpWindow();
+                        popUpWindow.start(Globals.popUpStage);
                     }
                     System.out.println("You hit your tale! Game Over");
-                }
-                else if (entity instanceof ShieldPowerup){
-                    Interactable interactable = (Interactable) entity;
-                    interactable.apply(this);
                 }
             }
         }
@@ -70,6 +71,9 @@ public class SnakeHead extends GameEntity implements Animatable {
             System.out.println("Game Over");
             System.out.println(Globals.score);
             Globals.gameLoop.stop();
+            Globals.popUpStage = new Stage();
+            PopUpWindow popUpWindow = new PopUpWindow();
+            popUpWindow.start(Globals.popUpStage);
         }
     }
 
