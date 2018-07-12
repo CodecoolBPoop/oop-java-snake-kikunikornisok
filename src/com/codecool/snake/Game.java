@@ -16,11 +16,11 @@ import java.util.Random;
 public class Game extends Pane {
 
     public Game() {
-        SnakeHead snakeHeadOne = new SnakeHead(this, 400, 500);
-        Globals.snakeHeads[0] = snakeHeadOne;
+        SnakeHead snakeHeadOne = new SnakeHead(this, 400, 500, 1);
+        Globals.snakeHeadObjects[0] = snakeHeadOne;
         if (Globals.twoPlayers) {
-            SnakeHead snakeHeadTwo = new SnakeHead(this, 600, 500);
-            Globals.snakeHeads[1] = snakeHeadTwo;
+            SnakeHead snakeHeadTwo = new SnakeHead(this, 600, 500, 2);
+            Globals.snakeHeadObjects[1] = snakeHeadTwo;
         }
     }
 
@@ -81,12 +81,12 @@ public class Game extends Pane {
         }
         Globals.score = 0;
         Globals.gameObjects.clear();
-        SnakeHead snakeHeadOne = new SnakeHead(this, 400, 500);
-        Globals.snakeHeads[0] = snakeHeadOne;
+        SnakeHead snakeHeadOne = new SnakeHead(this, 400, 500, 1);
+        Globals.snakeHeadObjects[0] = snakeHeadOne;
         Globals.snakeCounter = 1;
         if (Globals.twoPlayers) {
-            SnakeHead snakeHeadTwo = new SnakeHead(this, 600, 500);
-            Globals.snakeHeads[1] = snakeHeadTwo;
+            SnakeHead snakeHeadTwo = new SnakeHead(this, 600, 500, 2);
+            Globals.snakeHeadObjects[1] = snakeHeadTwo;
         }
     }
 }

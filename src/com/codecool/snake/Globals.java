@@ -16,8 +16,8 @@ public class Globals {
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
-    public static Image[] snakeHead = {new Image("snake_head.png"), new Image("nagyonkigyo.png")};
-    public static Image[] snakeBody = {new Image("mistic.png"), new Image("robin.png")};
+    public static Image[] snakeHeadImages = {new Image("snake_head.png"), new Image("nagyonkigyo.png")};
+    public static Image[] snakeBodyImages = {new Image("mistic.png"), new Image("robin.png")};
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image squirrel = new Image("squirrel.png");
     public static Image diversionEnemy = new Image("mushroom.png");
@@ -30,7 +30,8 @@ public class Globals {
     public static boolean rightKeyDown;
     public static boolean aKeyDown;
     public static boolean dKeyDown;
-    public static SnakeHead[] snakeHeads = new SnakeHead[2];
+    public static SnakeHead[] snakeHeadObjects = new SnakeHead[2];
+    public static String[] snakeNames = new String[2];
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
