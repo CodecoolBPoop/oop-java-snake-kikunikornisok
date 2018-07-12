@@ -5,7 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
-import com.codecool.snake.entities.powerups.ShieldPowerUP;
+import com.codecool.snake.entities.powerups.ShieldPowerup;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -16,10 +16,10 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     private float originalSpeed = 2;
     private float actualSpeed = originalSpeed;
-    public boolean changeDiversion = false;
+    private boolean changeDiversion = false;
     private static final float turnRate = 2;
     private int snakeMainBodyLength = 10;
-    private boolean shieldActice = false;
+    private boolean shieldActive = false;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private float startMushroomTime;
@@ -39,7 +39,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void step() {
         double dir = getRotate();
         changeDiversion(dir, changeDiversion);
-        if(Globals.gameTimeAtStart-Globals.shieldactiveted == 600){
+        if(Globals.gameTimeAtStart-Globals.shieldActivated == 600){
             diActivateShield();
         }
 
@@ -53,12 +53,12 @@ public class SnakeHead extends GameEntity implements Animatable {
                     System.out.println(interactable.getMessage());
                 }
                 else if (entity instanceof SnakeBody && gameObjectCopy.indexOf(entity) > snakeMainBodyLength){
-                    if(isShieldActice() == false){
+                    if(isShieldActive() == false){
                         Globals.gameLoop.stop();
                     }
                     System.out.println("You hit your tale! Game Over");
                 }
-                else if (entity instanceof ShieldPowerUP){
+                else if (entity instanceof ShieldPowerup){
                     Interactable interactable = (Interactable) entity;
                     interactable.apply(this);
                 }
@@ -81,14 +81,14 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void activateShield(){
-        shieldActice = true;
-        Globals.shieldactiveted = Globals.gameTimeAtStart;
+        shieldActive = true;
+        Globals.shieldActivated = Globals.gameTimeAtStart;
     ; }
 
     public void diActivateShield(){
         System.out.println("Shield OFF");
-        Globals.shieldactiveted = 0;
-        shieldActice = false;
+        Globals.shieldActivated = 0;
+        shieldActive = false;
     }
 
     public void changeHealth(int diff) {
@@ -117,7 +117,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(getY() + heading.getY());
     }
 
-    public boolean isShieldActice() { return shieldActice; }
+    public boolean isShieldActive() { return shieldActive; }
 
     public float getActualSpeed() {
         return this.actualSpeed;
@@ -137,6 +137,14 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void setStartMushroomTime(float startMushroomTime) {
         this.startMushroomTime = startMushroomTime;
+    }
+
+    public boolean isChangeDiversion() {
+        return changeDiversion;
+    }
+
+    public void setChangeDiversion(boolean changeDiversion) {
+        this.changeDiversion = changeDiversion;
     }
 
 }

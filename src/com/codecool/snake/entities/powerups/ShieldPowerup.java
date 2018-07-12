@@ -7,11 +7,11 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 import java.util.Date;
 
-public class ShieldPowerUP extends GameEntity implements Interactable {
+public class ShieldPowerup extends GameEntity implements Interactable {
 
-    public ShieldPowerUP(Pane pane) {
+    public ShieldPowerup(Pane pane) {
         super(pane);
-        setImage(Globals.shieldPowerUP);
+        setImage(Globals.shield);
         pane.getChildren().add(this);
 
         double[] safeCoordinates = generateSafeSpotForEntity();
@@ -26,6 +26,6 @@ public class ShieldPowerUP extends GameEntity implements Interactable {
 
     @Override
     public String getMessage() {
-        return "Got szupcsi Shield 8===D";
+        return "Got szupcsi Shield";
     }
 }

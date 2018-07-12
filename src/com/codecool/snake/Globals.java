@@ -1,7 +1,6 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
-import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -18,11 +17,11 @@ public class Globals {
     public static Image snakeHead = new Image("snake_head.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
+    public static Image squirrel = new Image("squirrel.png");
     public static Image diversionEnemy = new Image("mushroom.png");
     public static Image mouse = new Image("mouse.png");
-    public static Image redBull = new Image("redbull.png");
     public static Image snail = new Image("snail.png");
-    public static Image shieldPowerUP = new Image("PC-Privacy-Shield.gif");
+    public static Image shield = new Image("shield.gif");
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
@@ -34,7 +33,7 @@ public class Globals {
     public static Game game;
     public static Stage stage;
     public static long gameTimeAtStart = 0;
-    public static long shieldactiveted;
+    public static long shieldActivated;
 
     public static int score;
 
