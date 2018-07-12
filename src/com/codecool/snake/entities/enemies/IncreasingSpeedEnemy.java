@@ -12,7 +12,7 @@ public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
     public IncreasingSpeedEnemy(Pane pane) {
         super(pane);
 
-        setImage(Globals.redBull);
+        setImage(Globals.squirrel);
         pane.getChildren().add(this);
 
         double[] safeCoordinates = generateSafeSpotForEntity();
