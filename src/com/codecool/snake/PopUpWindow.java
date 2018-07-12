@@ -22,7 +22,9 @@ public class PopUpWindow extends Application {
 
     @Override public void start(final Stage primaryStage) {
         primaryStage.setTitle("Game Over");
-        final Popup popup = new Popup(); popup.setX(300); popup.setY(200);
+        final Popup popup = new Popup();
+        popup.setX(300);
+        popup.setY(200);
         Button show = new Button("Restart");
         show.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
@@ -39,9 +41,11 @@ public class PopUpWindow extends Application {
             }
         });
 
+        Button score = new Button("Your score is: " + Globals.score);
+
         HBox layout = new HBox(10);
         layout.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-font-size: 20px;");
-        layout.getChildren().addAll(show, hide);
+        layout.getChildren().addAll(show, score, hide);
         primaryStage.setScene(new Scene(layout));
         primaryStage.show();
     }
