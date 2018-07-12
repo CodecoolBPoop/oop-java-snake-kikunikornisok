@@ -16,11 +16,9 @@ import java.util.Random;
 public class Game extends Pane {
 
     public Game() {
-        SnakeHead snakeHeadOne = new SnakeHead(this, 400, 500);
-        Globals.snakeHeads[0] = snakeHeadOne;
+        new SnakeHead(this, 400, 500, 1);
         if (Globals.twoPlayers) {
-            SnakeHead snakeHeadTwo = new SnakeHead(this, 600, 500);
-            Globals.snakeHeads[1] = snakeHeadTwo;
+            new SnakeHead(this, 600, 500, 2);
         }
     }
 
@@ -65,13 +63,13 @@ public class Game extends Pane {
 
         if (Globals.gameTimeAtStart % 500 == 0) {
             if(Globals.newGameObjects.contains(new DecreasingSpeedPowerup(this))) {
-                System.out.println("New CSIGA in da house");
+                System.out.println("New snail spawned");
             }
             new ChangeDirection(this);
         }
         if(Globals.gameTimeAtStart-Globals.shieldActivated == 699){
             new ShieldPowerup(this);
-            System.out.println("Shield on the map bitch");
+            System.out.println("New shield spawned");
         }
     }
 
@@ -81,12 +79,9 @@ public class Game extends Pane {
         }
         Globals.score = 0;
         Globals.gameObjects.clear();
-        SnakeHead snakeHeadOne = new SnakeHead(this, 400, 500);
-        Globals.snakeHeads[0] = snakeHeadOne;
-        Globals.snakeCounter = 1;
+        new SnakeHead(this, 400, 500, 1);
         if (Globals.twoPlayers) {
-            SnakeHead snakeHeadTwo = new SnakeHead(this, 600, 500);
-            Globals.snakeHeads[1] = snakeHeadTwo;
+            new SnakeHead(this, 600, 500, 2);
         }
     }
 }

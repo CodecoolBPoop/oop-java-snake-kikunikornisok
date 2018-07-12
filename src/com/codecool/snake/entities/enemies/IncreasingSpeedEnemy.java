@@ -34,6 +34,6 @@ public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
 
     @Override
     public String getMessage() {
-        return "speed increased";
+        return "Speed increased";
     }
 }

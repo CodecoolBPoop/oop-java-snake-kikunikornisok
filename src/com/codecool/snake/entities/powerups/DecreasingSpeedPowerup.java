@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import java.util.Random;
 
 public class DecreasingSpeedPowerup extends GameEntity implements Interactable, Animatable {
+
     private float decreasingAmount = (float) 0.2;
     private double direction;
 
@@ -59,6 +60,6 @@ public class DecreasingSpeedPowerup extends GameEntity implements Interactable, 
 
     @Override
     public String getMessage() {
-        return "speed decreased";
+        return "Speed decreased";
     }
 }

@@ -28,7 +28,7 @@ public class Main extends Application {
         Scene scene = new Scene(Globals.game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         Globals.stage.setScene(scene);
         Globals.stage.show();
-        Globals.game.setTableBackground(new Image("fű.jpg"));
+        Globals.game.setTableBackground(new Image("background_grass.jpg"));
         Globals.scene = scene;
         sound.startMusic("resources/Demokratikus-Kígyók.wav");
 

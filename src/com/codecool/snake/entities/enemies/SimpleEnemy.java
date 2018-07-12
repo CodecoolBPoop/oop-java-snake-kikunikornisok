@@ -15,7 +15,6 @@ import java.util.Random;
 public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
 
     private Point2D heading;
-    private static final int damage = 10;
     private double direction;
 
     public SimpleEnemy(Pane pane) {
@@ -55,7 +54,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
 
     @Override
     public void apply(SnakeHead player) {
-        if(player.isShieldActive() == false) {
+        if(!player.isShieldActive()) {
             Globals.score -= 10;
         }
         destroy();
@@ -63,6 +62,6 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
 
     @Override
     public String getMessage() {
-        return "10 damage";
+        return "-10 score";
     }
 }

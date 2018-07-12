@@ -11,6 +11,7 @@ import java.util.Random;
 
 // a simple powerup that makes the snake grow TODO make other powerups
 public class FoodPowerup extends GameEntity implements Interactable {
+
     private int point = 50;
 
     public FoodPowerup(Pane pane) {
@@ -34,6 +35,6 @@ public class FoodPowerup extends GameEntity implements Interactable {
 
     @Override
     public String getMessage() {
-        return "Got power-up :)";
+        return "Got power-up";
     }
 }
