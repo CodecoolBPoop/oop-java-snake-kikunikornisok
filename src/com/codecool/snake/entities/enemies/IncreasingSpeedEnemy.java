@@ -24,7 +24,7 @@ public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
     @Override
     public void apply(SnakeHead snakeHead) {
         Sound sound = new Sound();
-        sound.playShortSound("resources/eat.wav");
+        sound.playShortSound("resources/squirrel.wav");
         float newSpeed = snakeHead.getActualSpeed() + increasingAmount;
         if(!snakeHead.isShieldActive()) {
             snakeHead.setActualSpeed(newSpeed);

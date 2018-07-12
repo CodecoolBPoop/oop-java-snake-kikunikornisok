@@ -1,6 +1,7 @@
 package com.codecool.snake.entities.powerups;
 
 import com.codecool.snake.Globals;
+import com.codecool.snake.Sound;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
@@ -48,6 +49,8 @@ public class DecreasingSpeedPowerup extends GameEntity implements Interactable, 
 
     @Override
     public void apply(SnakeHead snakeHead) {
+        Sound sound = new Sound();
+        sound.playShortSound("resources/snail.wav");
         if (snakeHead.getActualSpeed() > snakeHead.getOriginalSpeed()) {
             float newSpeed = snakeHead.getActualSpeed() - decreasingAmount;
             snakeHead.setActualSpeed(newSpeed);
