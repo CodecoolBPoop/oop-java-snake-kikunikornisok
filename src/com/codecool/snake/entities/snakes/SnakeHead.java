@@ -24,30 +24,29 @@ public class SnakeHead extends GameEntity implements Animatable {
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private float startMushroomTime;
+    private int snakeNum;
 
-    public SnakeHead(Pane pane, int xc, int yc) {
+    public SnakeHead(Pane pane, int xc, int yc, int snakeNum) {
         super(pane);
         setX(xc);
         setY(yc);
         health = 100;
         tail = this;
-        if (Globals.snakeCounter == 1) {
-            setImage(Globals.snakeHead[0]);
-        } else {
-            setImage(Globals.snakeHead[1]);
+        this.snakeNum = snakeNum;
+
+        if (snakeNum == 1) {
+            setImage(Globals.snakeHeadImages[0]);
+        } else if (snakeNum == 2) {
+            setImage(Globals.snakeHeadImages[1]);
         }
         pane.getChildren().add(this);
 
         addPart(snakeMainBodyLength);
-
-        if (Globals.twoPlayers) {
-            Globals.snakeCounter++;
-        }
     }
 
     public void step() {
         double dir = getRotate();
-        changeDiversion(this, dir, changeDiversion);
+        changeDiversion(this.snakeNum, dir, changeDiversion);
         if(Globals.gameTimeAtStart-Globals.shieldActivated == 700) {
             diActivateShield();
         }
@@ -62,6 +61,7 @@ public class SnakeHead extends GameEntity implements Animatable {
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
                 }
+                // check if snake hit it's own tail
                 else if (entity instanceof SnakeBody && gameObjectCopy.indexOf(entity) > snakeBodyLengthToCheck + 1) {
                     if(!isShieldActive()){
                         Globals.gameLoop.stop();
@@ -87,65 +87,49 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
-            SnakeBody newPart = new SnakeBody(pane, tail);
-            tail = newPart;
+            tail = new SnakeBody(pane, tail, this.snakeNum);
         }
     }
 
     public void activateShield(){
         shieldActive = true;
         Globals.shieldActivated = Globals.gameTimeAtStart;
-    ; }
+    }
 
     public void diActivateShield(){
-        System.out.println("Shield OFF");
+        System.out.println("Shield wears off");
         Globals.shieldActivated = 0;
         shieldActive = false;
     }
 
-    public void changeHealth(int diff) {
-        health += diff;
-    }
-
-    public void changeDiversion(SnakeHead snakeHead, double dir, boolean change) {
-        if (snakeHead == Globals.snakeHeads[0]) {
+    public void changeDiversion(int snakeNum, double dir, boolean change) {
+        if (snakeNum == 1) {
             if (change) {
-                if (Globals.leftKeyDown) {
-                    dir = dir + turnRate;
-                }
-                if (Globals.rightKeyDown) {
-                    dir = dir - turnRate;
-                }
+                dir = setDiversion(Globals.leftKeyDown, Globals.rightKeyDown, dir);
             } else {
-                if (Globals.leftKeyDown) {
-                    dir = dir - turnRate;
-                }
-                if (Globals.rightKeyDown) {
-                    dir = dir + turnRate;
-                }
+                dir = setDiversion(Globals.rightKeyDown, Globals.leftKeyDown, dir);
             }
-        }
-        if (snakeHead == Globals.snakeHeads[1]){
+        } else if (snakeNum == 2){
             if (change) {
-                if (Globals.aKeyDown) {
-                    dir = dir + turnRate;
-                }
-                if (Globals.dKeyDown) {
-                    dir = dir - turnRate;
-                }
+                dir = setDiversion(Globals.aKeyDown, Globals.dKeyDown, dir);
             } else {
-                if (Globals.aKeyDown) {
-                    dir = dir - turnRate;
-                }
-                if (Globals.dKeyDown) {
-                    dir = dir + turnRate;
-                }
+                dir = setDiversion(Globals.dKeyDown, Globals.aKeyDown, dir);
             }
         }
         setRotate(dir);
         Point2D heading = Utils.directionToVector(dir, actualSpeed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
+    }
+
+    public double setDiversion(boolean leftKey, boolean rightKey, double dir) {
+        if (leftKey) {
+            dir = dir + turnRate;
+        }
+        if (rightKey) {
+            dir = dir - turnRate;
+        }
+        return dir;
     }
 
     public boolean isShieldActive() { return shieldActive; }
@@ -168,10 +152,6 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void setStartMushroomTime(float startMushroomTime) {
         this.startMushroomTime = startMushroomTime;
-    }
-
-    public boolean isChangeDiversion() {
-        return changeDiversion;
     }
 
     public void setChangeDiversion(boolean changeDiversion) {

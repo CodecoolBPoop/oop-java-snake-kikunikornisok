@@ -26,6 +26,6 @@ public class ShieldPowerup extends GameEntity implements Interactable {
 
     @Override
     public String getMessage() {
-        return "Got szupcsi Shield";
+        return "Got shield-up";
     }
 }
