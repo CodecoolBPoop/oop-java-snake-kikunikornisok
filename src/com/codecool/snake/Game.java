@@ -47,7 +47,7 @@ public class Game extends Pane {
 
     public void spawnEntities() {
         Random random = new Random();
-        int randomNum = random.nextInt(1017);
+        int randomNum = random.nextInt(501);
 
         if (randomNum == 500) {
             new FoodPowerup(this);
