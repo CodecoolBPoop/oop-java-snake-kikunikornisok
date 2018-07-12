@@ -30,8 +30,6 @@ public class Globals {
     public static boolean rightKeyDown;
     public static boolean aKeyDown;
     public static boolean dKeyDown;
-    public static SnakeHead[] snakeHeadObjects = new SnakeHead[2];
-    public static String[] snakeNames = new String[2];
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
@@ -44,7 +42,6 @@ public class Globals {
     public static long gameTimeAtStart = 0;
     public static long shieldActivated;
     public static boolean twoPlayers;
-    public static int snakeCounter = 1;
 
     public static int score;
 

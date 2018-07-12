@@ -34,23 +34,19 @@ public class SnakeHead extends GameEntity implements Animatable {
         tail = this;
         this.snakeNum = snakeNum;
 
-        if (Globals.snakeCounter == 1) {
+        if (snakeNum == 1) {
             setImage(Globals.snakeHeadImages[0]);
-        } else {
+        } else if (snakeNum == 2) {
             setImage(Globals.snakeHeadImages[1]);
         }
         pane.getChildren().add(this);
 
         addPart(snakeMainBodyLength);
-
-        if (Globals.twoPlayers) {
-            Globals.snakeCounter++;
-        }
     }
 
     public void step() {
         double dir = getRotate();
-        changeDiversion(this, dir, changeDiversion);
+        changeDiversion(this.snakeNum, dir, changeDiversion);
         if(Globals.gameTimeAtStart-Globals.shieldActivated == 700) {
             diActivateShield();
         }
@@ -110,8 +106,8 @@ public class SnakeHead extends GameEntity implements Animatable {
         health += diff;
     }
 
-    public void changeDiversion(SnakeHead snakeHead, double dir, boolean change) {
-        if (snakeHead == Globals.snakeHeadObjects[0]) {
+    public void changeDiversion(int snakeNum, double dir, boolean change) {
+        if (snakeNum == 1) {
             if (change) {
                 if (Globals.leftKeyDown) {
                     dir = dir + turnRate;
@@ -127,8 +123,7 @@ public class SnakeHead extends GameEntity implements Animatable {
                     dir = dir + turnRate;
                 }
             }
-        }
-        if (snakeHead == Globals.snakeHeadObjects[1]){
+        } else if (snakeNum == 2){
             if (change) {
                 if (Globals.aKeyDown) {
                     dir = dir + turnRate;
