@@ -22,6 +22,7 @@ public class Globals {
     public static Image mouse = new Image("mouse.png");
     public static Image redBull = new Image("redbull.png");
     public static Image snail = new Image("snail.png");
+    public static Image shieldPowerUP = new Image("PC-Privacy-Shield.gif");
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
@@ -33,6 +34,7 @@ public class Globals {
     public static Game game;
     public static Stage stage;
     public static long gameTimeAtStart = 0;
+    public static long shieldactiveted;
 
     public static int score;
 

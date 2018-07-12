@@ -5,6 +5,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.enemies.ChangeDirection;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.animation.AnimationTimer;
+import sun.nio.ch.sctp.SctpNet;
 
 public class GameLoop extends AnimationTimer {
 
@@ -31,5 +32,6 @@ public class GameLoop extends AnimationTimer {
         Globals.oldGameObjects.clear();
         Globals.score ++;
         Globals.gameTimeAtStart++;
+
     }
 }

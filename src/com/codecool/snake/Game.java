@@ -4,6 +4,7 @@ import com.codecool.snake.entities.enemies.IncreasingSpeedEnemy;
 import com.codecool.snake.entities.enemies.ChangeDirection;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.DecreasingSpeedPowerup;
+import com.codecool.snake.entities.powerups.ShieldPowerUP;
 import com.codecool.snake.entities.powerups.FoodPowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
@@ -28,6 +29,8 @@ public class Game extends Pane {
         new FoodPowerup(this);
         new FoodPowerup(this);
         new FoodPowerup(this);
+
+        new ShieldPowerUP(this);
 
         new IncreasingSpeedEnemy(this);
         new IncreasingSpeedEnemy(this);

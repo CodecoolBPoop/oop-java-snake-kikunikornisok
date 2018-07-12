@@ -5,6 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.powerups.ShieldPowerUP;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -18,6 +19,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     public boolean changeDiversion = false;
     private static final float turnRate = 2;
     private int snakeMainBodyLength = 10;
+    private boolean shieldActice = false;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private float startMushroomTime;
@@ -37,6 +39,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void step() {
         double dir = getRotate();
         changeDiversion(dir, changeDiversion);
+        if(Globals.gameTimeAtStart-Globals.shieldactiveted == 600){
+            diActivateShield();
+        }
 
         // check if collided with an enemy or a powerup
         List<GameEntity> gameObjectCopy = new ArrayList<>(Globals.gameObjects);
@@ -48,8 +53,14 @@ public class SnakeHead extends GameEntity implements Animatable {
                     System.out.println(interactable.getMessage());
                 }
                 else if (entity instanceof SnakeBody && gameObjectCopy.indexOf(entity) > snakeMainBodyLength){
-                    Globals.gameLoop.stop();
+                    if(isShieldActice() == false){
+                        Globals.gameLoop.stop();
+                    }
                     System.out.println("You hit your tale! Game Over");
+                }
+                else if (entity instanceof ShieldPowerUP){
+                    Interactable interactable = (Interactable) entity;
+                    interactable.apply(this);
                 }
             }
         }
@@ -67,6 +78,17 @@ public class SnakeHead extends GameEntity implements Animatable {
             SnakeBody newPart = new SnakeBody(pane, tail);
             tail = newPart;
         }
+    }
+
+    public void activateShield(){
+        shieldActice = true;
+        Globals.shieldactiveted = Globals.gameTimeAtStart;
+    ; }
+
+    public void diActivateShield(){
+        System.out.println("Shield OFF");
+        Globals.shieldactiveted = 0;
+        shieldActice = false;
     }
 
     public void changeHealth(int diff) {
@@ -94,6 +116,8 @@ public class SnakeHead extends GameEntity implements Animatable {
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
     }
+
+    public boolean isShieldActice() { return shieldActice; }
 
     public float getActualSpeed() {
         return this.actualSpeed;

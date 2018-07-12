@@ -1,36 +1,31 @@
-package com.codecool.snake.entities.enemies;
+package com.codecool.snake.entities.powerups;
 
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
+import java.util.Date;
 
-public class IncreasingSpeedEnemy extends GameEntity implements Interactable {
-    private float increasingAmount = (float) 0.2;
+public class ShieldPowerUP extends GameEntity implements Interactable {
 
-    public IncreasingSpeedEnemy(Pane pane) {
+    public ShieldPowerUP(Pane pane) {
         super(pane);
-
-        setImage(Globals.redBull);
+        setImage(Globals.shieldPowerUP);
         pane.getChildren().add(this);
 
         double[] safeCoordinates = generateSafeSpotForEntity();
         setX(safeCoordinates[0]);
         setY(safeCoordinates[1]);
     }
-
     @Override
     public void apply(SnakeHead snakeHead) {
-        float newSpeed = snakeHead.getActualSpeed() + increasingAmount;
-        if(snakeHead.shieldActice == false) {
-            snakeHead.setActualSpeed(newSpeed);
-        }
+        snakeHead.activateShield();
         destroy();
     }
 
     @Override
     public String getMessage() {
-        return "speed increased";
+        return "Got szupcsi Shield 8===D";
     }
 }
